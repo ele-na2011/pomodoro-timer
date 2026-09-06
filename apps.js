@@ -31,6 +31,7 @@ const sessionCountText = document.getElementById("sessionCount");
 const modeButtons = document.querySelectorAll(".modeButton");
 const whiteNoiseAudio = document.getElementById("whiteNoiseAudio");
 const brownNoiseAudio = document.getElementById("brownNoiseAudio");
+const pinkNoiseAudio = document.getElementById("pinkNoiseAudio");
 const soundButtons = document.querySelectorAll(".sound-button");
 const volumeSliders = document.querySelectorAll(".volumeSlider");
 const streakCount = document.getElementById("streakCount");
@@ -46,13 +47,15 @@ const customButton = document.getElementById("customButton");
 const backgroundButtons = document.querySelectorAll(".backgroundButton");
 
 
+
 const soundAudios = {
     white: whiteNoiseAudio,
-    brown: brownNoiseAudio
+    brown: brownNoiseAudio,
+    pink: pinkNoiseAudio,
 };
 
 const backgrounds = {
-    space: "url(\"spaceimage.jpg\")",
+    space: "url(https://wallpapercave.com/wp/wp14437838.jpg)",
     mountains: "url(https://imgcp.aacdn.jp/img-a/1200/900/global-aaj-front/article/2015/12/565f05f621364_565f018e5feb3_1467636135.jpg)",
     lake: "url(https://4kwallpapers.com/images/wallpapers/sunset-lake-purple-pink-sky-scenery-8k-3840x2160-92.jpg)"
 };

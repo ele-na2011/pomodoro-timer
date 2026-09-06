@@ -1,7 +1,9 @@
 body {
     margin: 0;
-    overflow-x: hidden;
-    min-height: 100vh;
+    overflow: hidden;
+    min-height: 100dvh;
+    height: 100dvh;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -12,7 +14,7 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     font-family:"Pixelify Sans", sans-serif;
-    padding: 5vh 5vw;
+    padding: 1rem 5vw;
     gap: 0.75rem;
     position: relative;
 }
@@ -24,10 +26,14 @@ button {
 .clockHolder {
     width: min(90vw, 600px);
     background-color: rgba(255, 255, 255, 0.7);
-    margin: 10px auto;
+    margin: 0 auto;
     padding: clamp(20px, 4vw, 40px);
     color: #5b2c83;
     max-width: 600px;
+    min-height: 0;
+    max-height: calc(100dvh - 2rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
     border-radius: 10px;
     box-sizing: border-box;
     border: 1px solid rgba(255, 255, 255, 0.5);
@@ -48,6 +54,9 @@ button {
     justify-content: center;
     gap: 1rem;
     width: min(100%, 960px);
+    height: calc(100dvh - 2rem);
+    min-height: 0;
+    overflow: hidden;
 }
 
 .modeButtons {
@@ -205,6 +214,7 @@ button {
     justify-content: center;
     gap: 0.8rem;
     width: auto;
+    max-height: 100%;
 }
 
 .settingsControls,
@@ -242,15 +252,17 @@ button {
 .settingsMenu,
 .statsMenu,
 .customMenu {
-    position: absolute;
+    position: fixed;
     z-index: 2;
-    top: 0;
-    right: min(calc(100% + 0.8rem), calc(100vw - 1rem));
+    top: auto;
+    bottom: 1rem;
+    right: max(1rem, calc((100vw - 960px) / 2 + 105px));
     left: auto;
     transform: none;
     width: min(320px, calc(100vw - 2rem));
-    max-height: calc(100vh - 2rem);
+    max-height: calc(100dvh - 2rem);
     overflow-y: auto;
+    overscroll-behavior: contain;
     box-sizing: border-box;
     padding: 1rem;
     color: #5b2c83;
@@ -362,13 +374,14 @@ button {
 }
 
 .soundMenu {
-    position: absolute;
-    right: min(calc(100% + 0.8rem), calc(100vw - 1rem));
-    top: 0;
+    position: fixed;
+    right: max(1rem, calc((100vw - 960px) / 2 + 105px));
+    top: auto;
+    bottom: 1rem;
     display: grid;
     gap: 0.7rem;
     width: min(340px, calc(100vw - 2rem));
-    max-height: calc(100vh - 2rem);
+    max-height: calc(100dvh - 2rem);
     overflow-y: auto;
     box-sizing: border-box;
     padding: 0.9rem;
@@ -456,11 +469,14 @@ button {
     .settingsMenu,
     .statsMenu,
     .customMenu {
-        top: calc(100% + 0.8rem);
-        right: auto;
-        left: 50%;
-        transform: translateX(-50%);
-        max-height: calc(100vh - 6rem);
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+        bottom: 1rem;
+        left: 1rem;
+        width: auto;
+        max-height: none;
+        transform: none;
     }
 }
 
@@ -471,4 +487,6 @@ input[type="range"] {
     cursor: url("pusheencursor-small.png") 14 1, pointer;
 }
 
-
+.customMenu {
+    max-height: calc(100dvh - 2rem);
+}
