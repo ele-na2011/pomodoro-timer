@@ -41,6 +41,14 @@ button {
     7px 7px 10px rgba(0, 0, 0, 0.3);
 }
 
+.appLayout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    width: min(100%, 960px);
+}
+
 .modeButtons {
     display: flex;
     justify-content: center;
@@ -191,10 +199,11 @@ button {
 
 .dashboardControls {
     display: flex;
+    flex-direction: column;
     align-items: flex-start;
     justify-content: center;
     gap: 0.8rem;
-    width: min(90vw, 600px);
+    width: auto;
 }
 
 .settingsControls,
@@ -232,9 +241,10 @@ button {
 .statsMenu {
     position: absolute;
     z-index: 2;
-    top: calc(100% + 0.8rem);
-    left: 50%;
-    transform: translateX(-50%);
+    top: 0;
+    right: calc(100% + 0.8rem);
+    left: auto;
+    transform: none;
     min-width: 220px;
     padding: 1rem;
     color: #5b2c83;
@@ -333,8 +343,8 @@ button {
 
 .soundMenu {
     position: absolute;
-    right: 0;
-    bottom: calc(100% + 0.8rem);
+    right: calc(100% + 0.8rem);
+    top: 0;
     display: grid;
     gap: 0.7rem;
     min-width: min(90vw, 340px);
@@ -407,12 +417,22 @@ button {
 }
 
 @media (max-width: 600px) {
-    .dashboardControls {
+    .appLayout {
         flex-direction: column;
-        align-items: center;
     }
 
-    .soundMenu {
+    .dashboardControls {
+        align-items: center;
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .soundMenu,
+    .settingsMenu,
+    .statsMenu {
+        top: calc(100% + 0.8rem);
         right: auto;
         left: 50%;
         transform: translateX(-50%);

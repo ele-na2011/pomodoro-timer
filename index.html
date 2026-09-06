@@ -10,7 +10,8 @@
         <link rel="icon" type="image/png" href="caticon.jpg">
     </head>
     <body>
-        <div class = "clockHolder">
+        <main class = "appLayout">
+            <div class = "clockHolder">
             <h2 id = "dateElement"></h2>
             <h2 id = "timeElement"></h2>
 
@@ -29,9 +30,9 @@
                 <button id = "resetButton" type = "button">Reset</button>
             </div>
             <p id = "sessionCount" class = "sessionCount">0 focus sessions completed</p>
-        </div>
+            </div>
 
-        <div class = "dashboardControls">
+            <div class = "dashboardControls">
             <details class = "soundControls">
                 <summary>Background Sounds</summary>
                 <div class = "soundMenu" aria-label = "Background sound mixer">
@@ -86,7 +87,8 @@
             </div>
 
 
-        </div>
+            </div>
+        </main>
 
         <audio id = "whiteNoiseAudio" loop>
             <source src = "02-White-Noise-60min.mp3" type = "audio/mpeg">
