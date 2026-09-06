@@ -262,6 +262,27 @@ button {
     font: inherit;
 }
 
+.backgroundChoices {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.backgroundButton {
+    padding: 0.4rem 0.65rem;
+    color: #5b2c83;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(91, 44, 131, 0.35);
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.backgroundButton:hover,
+.backgroundButton.active {
+    color: white;
+    background: #5b2c83;
+}
+
 .statsMenu {
     min-width: 280px;
 }

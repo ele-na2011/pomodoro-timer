@@ -42,12 +42,21 @@ const shortBreakDurationInput = document.getElementById("shortBreakDuration");
 const longBreakDurationInput = document.getElementById("longBreakDuration");
 const settingsButton = document.getElementById("settingsButton");
 const statsButton = document.getElementById("statsButton");
+const backgroundButtons = document.querySelectorAll(".backgroundButton");
 
 
 const soundAudios = {
     white: whiteNoiseAudio,
     brown: brownNoiseAudio
 };
+
+const backgrounds = {
+    space: "url(\"spaceimage.jpg\")",
+    mountains: "linear-gradient(160deg, #f8c7a8 0%, #c47b68 48%, #33445c 49%, #182435 100%)",
+    lake: "linear-gradient(180deg, #8cc9e8 0%, #d8f0f2 52%, #6c9f9c 53%, #294d5a 100%)"
+};
+
+const backgroundStorageKey = "pomodoroBackground";
 
 const modes = {
     focus: { label: "Focus", seconds: focusDurationInput.value * 60, ready: "Ready to focus" },
@@ -62,6 +71,17 @@ const progressStorageKey = "pomodoroProgress";
 let progress = loadProgress();
 let isRunning = false;
 let timer = null;
+
+function applyBackground(backgroundName) {
+    const background = backgrounds[backgroundName] ? backgroundName : "space";
+    document.body.style.backgroundImage = backgrounds[background];
+    backgroundButtons.forEach((backgroundButton) => {
+        const isActive = backgroundButton.dataset.background === background;
+        backgroundButton.classList.toggle("active", isActive);
+        backgroundButton.setAttribute("aria-pressed", String(isActive));
+    });
+    localStorage.setItem(backgroundStorageKey, background);
+}
 
 function getDateKey(date = new Date()) {
     const year = date.getFullYear();
@@ -242,6 +262,14 @@ function setupExpandablePanel(buttonElement, panelClass) {
 
 setupExpandablePanel(settingsButton, "settingsMenu");
 setupExpandablePanel(statsButton, "statsMenu");
+
+backgroundButtons.forEach((backgroundButton) => {
+    backgroundButton.addEventListener("click", () => {
+        applyBackground(backgroundButton.dataset.background);
+    });
+});
+
+applyBackground(localStorage.getItem(backgroundStorageKey) || "space");
 
 soundButtons.forEach((soundButton) => {
     soundButton.addEventListener("click", async () => {
