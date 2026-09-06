@@ -4,13 +4,31 @@
         <title>pomodoro</title>
         <link rel = "stylesheet" href = "styles.css">
         <script src = "apps.js" defer></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+
     </head>
     <body>
         <div class = "clockHolder">
             <h2 id = "dateElement"></h2>
             <h2 id = "timeElement"></h2>
-            <h1 id = "countdownTimer">10</h1>
-            <button id = "bigButton">Start</button>
+            
+            <div class = "modeButtons" role = "group" aria-label = "Timer mode">
+                <button class = "modeButton active" data-mode = "focus" type = "button" id="focusButton">Focus</button>
+                <button class = "modeButton" data-mode = "shortBreak" type = "button" id="shortButton">Short break</button>
+                <button class = "modeButton" data-mode = "longBreak" type = "button" id="longButton">Long break</button>
+            </div>
+            <h1 id = "countdownTimer" aria-live = "polite">25:00</h1>
+            <div class = "progressTrack" aria-hidden = "true">
+                <div id = "progressBar" class = "progressBar"></div>
+            </div>
+            <p id = "timerStatus" class = "timerStatus">Ready to focus</p>
+            <div class = "timerActions">
+                <button id = "bigButton" type = "button">Start</button>
+                <button id = "resetButton" type = "button">Reset</button>
+            </div>
+            <p id = "sessionCount" class = "sessionCount">0 focus sessions completed</p>
         </div>
 
         <button id = "whiteNoiseButton" type = "button">White Noise</button>

@@ -21,14 +21,27 @@ function updateTime() {
 setInterval(updateTime, 1000);
 updateTime();
 
-//countdown timer
+// Pomodoro countdown
 const countdownTimer = document.getElementById("countdownTimer");
 const button = document.getElementById("bigButton");
+const resetButton = document.getElementById("resetButton");
+const progressBar = document.getElementById("progressBar");
+const timerStatus = document.getElementById("timerStatus");
+const sessionCountText = document.getElementById("sessionCount");
+const modeButtons = document.querySelectorAll(".modeButton");
 const whiteNoiseButton = document.getElementById("whiteNoiseButton");
 const whiteNoiseAudio = document.getElementById("whiteNoiseAudio");
 
-const totalSeconds = 25 * 60;
+const modes = {
+    focus: { label: "Focus", seconds: 25 * 60, ready: "Ready to focus" },
+    shortBreak: { label: "Short break", seconds: 5 * 60, ready: "Ready for a short break" },
+    longBreak: { label: "Long break", seconds: 15 * 60, ready: "Ready for a long break" }
+};
+
+let currentMode = "focus";
+let totalSeconds = modes[currentMode].seconds;
 let countdown = totalSeconds;
+let completedSessions = 0;
 let isRunning = false;
 let timer = null;
 
@@ -47,6 +60,57 @@ function pauseCountdown() {
     timer = null;
     isRunning = false;
     button.textContent = "Resume";
+    timerStatus.textContent = "Paused";
+}
+
+function renderTimer() {
+    countdownTimer.textContent = formatCountdown(countdown);
+    progressBar.style.width = `${(countdown / totalSeconds) * 100}%`;
+    document.title = `${formatCountdown(countdown)} - ${modes[currentMode].label}`;
+}
+
+function selectMode(modeName) {
+    if (isRunning || !modes[modeName]) {
+        return;
+    }
+
+    currentMode = modeName;
+    totalSeconds = modes[currentMode].seconds;
+    countdown = totalSeconds;
+    modeButtons.forEach((modeButton) => {
+        const isActive = modeButton.dataset.mode === currentMode;
+        modeButton.classList.toggle("active", isActive);
+        modeButton.setAttribute("aria-pressed", String(isActive));
+    });
+    button.textContent = "Start";
+    timerStatus.textContent = modes[currentMode].ready;
+    renderTimer();
+}
+
+function finishCountdown() {
+    clearInterval(timer);
+    timer = null;
+    isRunning = false;
+
+    if (currentMode === "focus") {
+        completedSessions += 1;
+        sessionCountText.textContent = `${completedSessions} focus session${completedSessions === 1 ? "" : "s"} completed`;
+    }
+
+    const nextMode = currentMode === "focus"
+        ? completedSessions % 4 === 0 ? "longBreak" : "shortBreak"
+        : "focus";
+    currentMode = nextMode;
+    totalSeconds = modes[currentMode].seconds;
+    countdown = totalSeconds;
+    modeButtons.forEach((modeButton) => {
+        const isActive = modeButton.dataset.mode === currentMode;
+        modeButton.classList.toggle("active", isActive);
+        modeButton.setAttribute("aria-pressed", String(isActive));
+    });
+    button.textContent = "Start";
+    timerStatus.textContent = `${modes[currentMode].label} ready`;
+    renderTimer();
 }
 
 function startCountdown() {
@@ -57,28 +121,41 @@ function startCountdown() {
 
     if (countdown === 0) {
         countdown = totalSeconds;
-        countdownTimer.textContent = formatCountdown(countdown);
+        renderTimer();
     }
 
     isRunning = true;
     button.textContent = "Pause";
+    timerStatus.textContent = `${modes[currentMode].label} in progress`;
 
     timer = setInterval(() => {
         if (countdown > 0) {
             countdown -= 1;
-            countdownTimer.textContent = formatCountdown(countdown);
+            renderTimer();
         } else {
-            clearInterval(timer);
-            timer = null;
-            isRunning = false;
-            button.textContent = "Start";
-            countdownTimer.textContent = "Done!";
+            finishCountdown();
         }
     }, 1000);
 }
 
-countdownTimer.textContent = formatCountdown(countdown);
+function resetCountdown() {
+    clearInterval(timer);
+    timer = null;
+    isRunning = false;
+    countdown = totalSeconds;
+    button.textContent = "Start";
+    timerStatus.textContent = modes[currentMode].ready;
+    renderTimer();
+}
+
+modeButtons.forEach((modeButton) => {
+    modeButton.setAttribute("aria-pressed", String(modeButton.classList.contains("active")));
+    modeButton.addEventListener("click", () => selectMode(modeButton.dataset.mode));
+});
+
+renderTimer();
 button.addEventListener("click", startCountdown);
+resetButton.addEventListener("click", resetCountdown);
 
 whiteNoiseButton.addEventListener("click", () => {
     if (whiteNoiseAudio.paused) {
