@@ -42,6 +42,7 @@ const shortBreakDurationInput = document.getElementById("shortBreakDuration");
 const longBreakDurationInput = document.getElementById("longBreakDuration");
 const settingsButton = document.getElementById("settingsButton");
 const statsButton = document.getElementById("statsButton");
+const customButton = document.getElementById("customButton");
 const backgroundButtons = document.querySelectorAll(".backgroundButton");
 
 
@@ -262,6 +263,7 @@ function setupExpandablePanel(buttonElement, panelClass) {
 
 setupExpandablePanel(settingsButton, "settingsMenu");
 setupExpandablePanel(statsButton, "statsMenu");
+setupExpandablePanel(customButton, "customMenu");
 
 backgroundButtons.forEach((backgroundButton) => {
     backgroundButton.addEventListener("click", () => {

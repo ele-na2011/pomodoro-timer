@@ -207,7 +207,8 @@ button {
 }
 
 .settingsControls,
-.statsControls {
+.statsControls,
+.customControls {
     position: relative;
 }
 
@@ -238,7 +239,8 @@ button {
 }
 
 .settingsMenu,
-.statsMenu {
+.statsMenu,
+.customMenu {
     position: absolute;
     z-index: 2;
     top: 0;
@@ -255,7 +257,8 @@ button {
 }
 
 .settingsMenu[hidden],
-.statsMenu[hidden] {
+.statsMenu[hidden],
+.customMenu[hidden] {
     display: none;
 }
 
@@ -297,6 +300,11 @@ button {
     min-width: 280px;
 }
 
+.customMenu {
+    min-width: 220px;
+    text-align: left;
+}
+
 .statsGrid {
     display: grid;
     grid-template-columns: repeat(4, auto);
@@ -315,13 +323,6 @@ button {
     text-shadow: 1px 1px 0 #2b2a2a;
 }
 
-.soundControls summary,
-
-.soundControls[open] summary::after {
-    content: " -";
-}
-
-.soundControls summary:hover,
 .sound-button:hover {
     background-color: #5b2c83;
     color: white;
@@ -329,7 +330,6 @@ button {
     transform: translateY(-1px);
 }
 
-.soundControls summary:focus-visible,
 .sound-button:focus-visible {
     outline: 3px solid rgba(123, 77, 181, 0.5);
     outline-offset: 3px;
@@ -339,6 +339,22 @@ button {
     transform: translate(5px, 5px);
     background-color: #5b2c83;
     color: white;
+}
+
+.soundControls summary {
+    list-style: none;
+}
+
+.soundControls summary::-webkit-details-marker {
+    display: none;
+}
+
+.soundControls summary::after {
+    content: " +";
+}
+
+.soundControls[open] summary::after {
+    content: " -";
 }
 
 .soundMenu {
@@ -431,7 +447,8 @@ button {
 
     .soundMenu,
     .settingsMenu,
-    .statsMenu {
+    .statsMenu,
+    .customMenu {
         top: calc(100% + 0.8rem);
         right: auto;
         left: 50%;
@@ -446,3 +463,18 @@ input[type="range"] {
     cursor: url("pusheencursor-small.png") 14 1, pointer;
 }
 
+footer {
+    padding: 0.5rem 0;
+    font-size: 0.75rem;
+    background-color: #5b2c83;
+    color: white;
+}
+
+footer a {
+    color: white;
+    text-decoration: underline;
+}
+
+footer a:hover {
+    text-decoration: none;
+}

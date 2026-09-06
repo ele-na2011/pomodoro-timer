@@ -5,8 +5,8 @@
         <link rel = "stylesheet" href = "styles.css">
         <script src = "apps.js" defer></script>
         <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
         <link rel="icon" type="image/png" href="caticon.jpg">
     </head>
     <body>
@@ -34,7 +34,7 @@
 
             <div class = "dashboardControls">
             <details class = "soundControls">
-                <summary>Background Sounds</summary>
+                <summary class = "dashboardButton">Background Sounds</summary>
                 <div class = "soundMenu" aria-label = "Background sound mixer">
                     <div class = "soundRow">
                         <span>White Noise</span>
@@ -50,6 +50,14 @@
                         <label class = "volumeControl">
                             <span class = "sr-only">Brown Noise volume</span>
                             <input class = "volumeSlider" data-sound = "brown" type = "range" min = "0" max = "1" step = "0.01" value = "0.5">
+                        </label>
+                    </div>
+                    <div class = "soundRow">
+                        <span>Pink Noise</span>
+                        <button class = "sound-button" data-sound = "pink" type = "button" aria-pressed = "false">Play</button>
+                        <label class = "volumeControl">
+                            <span class = "sr-only">Pink Noise volume</span>
+                            <input class = "volumeSlider" data-sound = "pink" type = "range" min = "0" max = "1" step = "0.01" value = "0.5">
                         </label>
                     </div>
                 </div>
@@ -86,12 +94,28 @@
                 </div>
             </div>
 
+            <div class = "customControls">
+                <button id = "customButton" class = "dashboardButton" type = "button" aria-expanded = "false" aria-controls = "customMenu">FAQs</button>
+                <div id = "customMenu" class = "customMenu" aria-label = "Custom panel">
+                    <!-- Add your custom HTML and controls inside this panel. -->
+                    <h2>FAQs</h2>
+                    <p><strong>What is a pomodoro?</strong></p>
+                    <p>A pomodoro is a time management technique that uses a timer to break down work into intervals, traditionally 25 minutes in length, separated by short breaks.</p>
+                    <p><strong>How does it help with productivity?</strong></p>
+                    <p>The pomodoro technique helps with productivity by creating a structured approach to work, reducing procrastination, and improving focus.</p>
+                    <p><strong>What are all the noises for?</strong></p>
+                    <p>The different noises are designed to create a more immersive environment, helping you concentrate better and block out distractions.</p>
+                    <p><strong>How do I reset my stats?</strong></p>
+                    <p>You can reset your stats at any time by clicking the "Reset Stats" button in the settings menu.</p>
+                </div>
+            </div>
+
 
             </div>
         </main>
 
         <audio id = "whiteNoiseAudio" loop>
-            <source src = "02-White-Noise-60min.mp3" type = "audio/mpeg">
+            <source src = "white noise.mp3" type = "audio/mpeg">
             your browser does not support the audio element
         </audio>
 
@@ -100,5 +124,14 @@
             your browser does not support the audio element
         </audio>
 
+        <audio id = "pinkNoiseAudio" loop>
+            <source src = "pink noise.mp3" type = "audio/mpeg">
+            your browser does not support the audio element
+        </audio>
+
+        <footer>
+            <p>&copy; 2026 <a href = "https://elenayang.ca" target = "_blank" rel = "noopener noreferrer">Elena Yang</a>. All rights reserved.</p>
+            <p>Find the github repository <a href = "https://github.com/ele-na2011/pomodoro-timer" target = "_blank" rel = "noopener noreferrer">here</a>.</p>
+        </footer>
     </body>
 </html>
