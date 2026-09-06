@@ -1,5 +1,6 @@
 body {
     margin: 0;
+    overflow-x: hidden;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -244,10 +245,13 @@ button {
     position: absolute;
     z-index: 2;
     top: 0;
-    right: calc(100% + 0.8rem);
+    right: min(calc(100% + 0.8rem), calc(100vw - 1rem));
     left: auto;
     transform: none;
-    min-width: 220px;
+    width: min(320px, calc(100vw - 2rem));
+    max-height: calc(100vh - 2rem);
+    overflow-y: auto;
+    box-sizing: border-box;
     padding: 1rem;
     color: #5b2c83;
     background-color: rgba(255, 255, 255, 0.92);
@@ -297,11 +301,11 @@ button {
 }
 
 .statsMenu {
-    min-width: 280px;
+    width: min(320px, calc(100vw - 2rem));
 }
 
 .customMenu {
-    min-width: 220px;
+    width: min(320px, calc(100vw - 2rem));
     text-align: left;
 }
 
@@ -359,11 +363,14 @@ button {
 
 .soundMenu {
     position: absolute;
-    right: calc(100% + 0.8rem);
+    right: min(calc(100% + 0.8rem), calc(100vw - 1rem));
     top: 0;
     display: grid;
     gap: 0.7rem;
-    min-width: min(90vw, 340px);
+    width: min(340px, calc(100vw - 2rem));
+    max-height: calc(100vh - 2rem);
+    overflow-y: auto;
+    box-sizing: border-box;
     padding: 0.9rem;
     background-color: rgba(255, 255, 255, 0.92);
     border: 1px solid rgba(255, 255, 255, 0.5);
@@ -453,6 +460,7 @@ button {
         right: auto;
         left: 50%;
         transform: translateX(-50%);
+        max-height: calc(100vh - 6rem);
     }
 }
 
