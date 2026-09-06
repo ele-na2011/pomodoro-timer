@@ -290,3 +290,10 @@ button {
     border: 0;
 }
 
+button,
+select,
+summary,
+input[type="range"] {
+    cursor: url("pusheencursor-small.png") 14 1, pointer;
+}
+
