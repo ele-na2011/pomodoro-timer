@@ -53,8 +53,8 @@ const soundAudios = {
 
 const backgrounds = {
     space: "url(\"spaceimage.jpg\")",
-    mountains: "linear-gradient(160deg, #f8c7a8 0%, #c47b68 48%, #33445c 49%, #182435 100%)",
-    lake: "linear-gradient(180deg, #8cc9e8 0%, #d8f0f2 52%, #6c9f9c 53%, #294d5a 100%)"
+    mountains: "url(https://imgcp.aacdn.jp/img-a/1200/900/global-aaj-front/article/2015/12/565f05f621364_565f018e5feb3_1467636135.jpg)",
+    lake: "url(https://4kwallpapers.com/images/wallpapers/sunset-lake-purple-pink-sky-scenery-8k-3840x2160-92.jpg)"
 };
 
 const backgroundStorageKey = "pomodoroBackground";

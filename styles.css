@@ -463,18 +463,4 @@ input[type="range"] {
     cursor: url("pusheencursor-small.png") 14 1, pointer;
 }
 
-footer {
-    padding: 0.5rem 0;
-    font-size: 0.75rem;
-    background-color: #5b2c83;
-    color: white;
-}
 
-footer a {
-    color: white;
-    text-decoration: underline;
-}
-
-footer a:hover {
-    text-decoration: none;
-}
