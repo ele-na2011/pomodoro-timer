@@ -31,10 +31,36 @@
             <p id = "sessionCount" class = "sessionCount">0 focus sessions completed</p>
         </div>
 
-        <button id = "whiteNoiseButton" type = "button">White Noise</button>
+        <details class = "soundControls">
+            <summary>Background Sounds</summary>
+            <div class = "soundMenu" aria-label = "Background sound mixer">
+                <div class = "soundRow">
+                    <span>White Noise</span>
+                    <button class = "sound-button" data-sound = "white" type = "button" aria-pressed = "false">Play</button>
+                    <label class = "volumeControl">
+                        <span class = "sr-only">White Noise volume</span>
+                        <input class = "volumeSlider" data-sound = "white" type = "range" min = "0" max = "1" step = "0.01" value = "0.5">
+                    </label>
+                </div>
+                <div class = "soundRow">
+                    <span>Brown Noise</span>
+                    <button class = "sound-button" data-sound = "brown" type = "button" aria-pressed = "false">Play</button>
+                    <label class = "volumeControl">
+                        <span class = "sr-only">Brown Noise volume</span>
+                        <input class = "volumeSlider" data-sound = "brown" type = "range" min = "0" max = "1" step = "0.01" value = "0.5">
+                    </label>
+                </div>
+            </div>
+        </details>
+        </div>
 
         <audio id = "whiteNoiseAudio" loop>
             <source src = "02-White-Noise-60min.mp3" type = "audio/mpeg">
+            your browser does not support the audio element
+        </audio>
+
+        <audio id = "brownNoiseAudio" loop>
+            <source src = "Brown Noise.mp3" type = "audio/mpeg">
             your browser does not support the audio element
         </audio>
 

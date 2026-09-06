@@ -29,8 +29,15 @@ const progressBar = document.getElementById("progressBar");
 const timerStatus = document.getElementById("timerStatus");
 const sessionCountText = document.getElementById("sessionCount");
 const modeButtons = document.querySelectorAll(".modeButton");
-const whiteNoiseButton = document.getElementById("whiteNoiseButton");
 const whiteNoiseAudio = document.getElementById("whiteNoiseAudio");
+const brownNoiseAudio = document.getElementById("brownNoiseAudio");
+const soundButtons = document.querySelectorAll(".sound-button");
+const volumeSliders = document.querySelectorAll(".volumeSlider");
+
+const soundAudios = {
+    white: whiteNoiseAudio,
+    brown: brownNoiseAudio
+};
 
 const modes = {
     focus: { label: "Focus", seconds: 25 * 60, ready: "Ready to focus" },
@@ -157,14 +164,33 @@ renderTimer();
 button.addEventListener("click", startCountdown);
 resetButton.addEventListener("click", resetCountdown);
 
-whiteNoiseButton.addEventListener("click", () => {
-    if (whiteNoiseAudio.paused) {
-        whiteNoiseAudio.play();
-        whiteNoiseButton.textContent = "Pause White Noise";
-    } else {
-        whiteNoiseAudio.pause();
-        whiteNoiseButton.textContent = "White Noise";
-    }
+soundButtons.forEach((soundButton) => {
+    soundButton.addEventListener("click", async () => {
+        const audio = soundAudios[soundButton.dataset.sound];
+
+        if (audio.paused) {
+            try {
+                await audio.play();
+                soundButton.textContent = "Pause";
+                soundButton.setAttribute("aria-pressed", "true");
+            } catch {
+                soundButton.textContent = "Play";
+            }
+            return;
+        }
+
+        audio.pause();
+        soundButton.textContent = "Play";
+        soundButton.setAttribute("aria-pressed", "false");
+    });
 });
 
+volumeSliders.forEach((volumeSlider) => {
+    const audio = soundAudios[volumeSlider.dataset.sound];
+    audio.volume = Number(volumeSlider.value);
+
+    volumeSlider.addEventListener("input", () => {
+        audio.volume = Number(volumeSlider.value);
+    });
+});
 
