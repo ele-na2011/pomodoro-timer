@@ -13,7 +13,7 @@
         <div class = "clockHolder">
             <h2 id = "dateElement"></h2>
             <h2 id = "timeElement"></h2>
-            
+
             <div class = "modeButtons" role = "group" aria-label = "Timer mode">
                 <button class = "modeButton active" data-mode = "focus" type = "button" id="focusButton">Focus</button>
                 <button class = "modeButton" data-mode = "shortBreak" type = "button" id="shortButton">Short break</button>
@@ -31,27 +31,54 @@
             <p id = "sessionCount" class = "sessionCount">0 focus sessions completed</p>
         </div>
 
-        <details class = "soundControls">
-            <summary>Background Sounds</summary>
-            <div class = "soundMenu" aria-label = "Background sound mixer">
-                <div class = "soundRow">
-                    <span>White Noise</span>
-                    <button class = "sound-button" data-sound = "white" type = "button" aria-pressed = "false">Play</button>
-                    <label class = "volumeControl">
-                        <span class = "sr-only">White Noise volume</span>
-                        <input class = "volumeSlider" data-sound = "white" type = "range" min = "0" max = "1" step = "0.01" value = "0.5">
-                    </label>
+        <div class = "dashboardControls">
+            <details class = "soundControls">
+                <summary>Background Sounds</summary>
+                <div class = "soundMenu" aria-label = "Background sound mixer">
+                    <div class = "soundRow">
+                        <span>White Noise</span>
+                        <button class = "sound-button" data-sound = "white" type = "button" aria-pressed = "false">Play</button>
+                        <label class = "volumeControl">
+                            <span class = "sr-only">White Noise volume</span>
+                            <input class = "volumeSlider" data-sound = "white" type = "range" min = "0" max = "1" step = "0.01" value = "0.5">
+                        </label>
+                    </div>
+                    <div class = "soundRow">
+                        <span>Brown Noise</span>
+                        <button class = "sound-button" data-sound = "brown" type = "button" aria-pressed = "false">Play</button>
+                        <label class = "volumeControl">
+                            <span class = "sr-only">Brown Noise volume</span>
+                            <input class = "volumeSlider" data-sound = "brown" type = "range" min = "0" max = "1" step = "0.01" value = "0.5">
+                        </label>
+                    </div>
                 </div>
-                <div class = "soundRow">
-                    <span>Brown Noise</span>
-                    <button class = "sound-button" data-sound = "brown" type = "button" aria-pressed = "false">Play</button>
-                    <label class = "volumeControl">
-                        <span class = "sr-only">Brown Noise volume</span>
-                        <input class = "volumeSlider" data-sound = "brown" type = "range" min = "0" max = "1" step = "0.01" value = "0.5">
-                    </label>
+            </details>
+
+            <div class = "settingsControls">
+                <button id = "settingsButton" class = "dashboardButton" type = "button" aria-expanded = "false" aria-controls = "settingsMenu">Settings</button>
+                <div class = "settingsMenu" aria-label = "Timer settings">
+                    <label for = "focusDuration">Focus duration (minutes)</label>
+                    <input id = "focusDuration" type = "number" min = "1" max = "120" value = "25">
+                    <label for = "shortBreakDuration">Short break duration (minutes)</label>
+                    <input id = "shortBreakDuration" type = "number" min = "1" max = "30" value = "5">
+                    <label for = "longBreakDuration">Long break duration (minutes)</label>
+                    <input id = "longBreakDuration" type = "number" min = "1" max = "60" value = "15">
                 </div>
             </div>
-        </details>
+
+            <div class = "statsControls">
+                <button id = "statsButton" class = "dashboardButton" type = "button" aria-expanded = "false" aria-controls = "statsMenu">Stats</button>
+                <div class = "statsMenu" aria-label = "Timer statistics">
+                    <div class = "statsGrid">
+                        <p><strong id = "streakCount">0</strong><span>day streak</span></p>
+                        <p><strong id = "bestStreakCount">0</strong><span>best streak</span></p>
+                        <p><strong id = "totalSessionsCount">0</strong><span>total sessions</span></p>
+                        <p><strong id = "todaySessionsCount">0</strong><span>today</span></p>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
 
         <audio id = "whiteNoiseAudio" loop>

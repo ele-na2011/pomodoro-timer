@@ -33,6 +33,16 @@ const whiteNoiseAudio = document.getElementById("whiteNoiseAudio");
 const brownNoiseAudio = document.getElementById("brownNoiseAudio");
 const soundButtons = document.querySelectorAll(".sound-button");
 const volumeSliders = document.querySelectorAll(".volumeSlider");
+const streakCount = document.getElementById("streakCount");
+const bestStreakCount = document.getElementById("bestStreakCount");
+const totalSessionsCount = document.getElementById("totalSessionsCount");
+const todaySessionsCount = document.getElementById("todaySessionsCount");
+const focusDurationInput = document.getElementById("focusDuration");
+const shortBreakDurationInput = document.getElementById("shortBreakDuration");
+const longBreakDurationInput = document.getElementById("longBreakDuration");
+const settingsButton = document.getElementById("settingsButton");
+const statsButton = document.getElementById("statsButton");
+
 
 const soundAudios = {
     white: whiteNoiseAudio,
@@ -40,17 +50,72 @@ const soundAudios = {
 };
 
 const modes = {
-    focus: { label: "Focus", seconds: 25 * 60, ready: "Ready to focus" },
-    shortBreak: { label: "Short break", seconds: 5 * 60, ready: "Ready for a short break" },
-    longBreak: { label: "Long break", seconds: 15 * 60, ready: "Ready for a long break" }
+    focus: { label: "Focus", seconds: focusDurationInput.value * 60, ready: "Ready to focus" },
+    shortBreak: { label: "Short break", seconds: shortBreakDurationInput.value * 60, ready: "Ready for a short break" },
+    longBreak: { label: "Long break", seconds: longBreakDurationInput.value * 60, ready: "Ready for a long break" }
 };
 
 let currentMode = "focus";
 let totalSeconds = modes[currentMode].seconds;
 let countdown = totalSeconds;
-let completedSessions = 0;
+const progressStorageKey = "pomodoroProgress";
+let progress = loadProgress();
 let isRunning = false;
 let timer = null;
+
+function getDateKey(date = new Date()) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+}
+
+function loadProgress() {
+    try {
+        const savedProgress = JSON.parse(localStorage.getItem(progressStorageKey));
+        return {
+            totalSessions: Number(savedProgress?.totalSessions) || 0,
+            currentStreak: Number(savedProgress?.currentStreak) || 0,
+            bestStreak: Number(savedProgress?.bestStreak) || 0,
+            lastSessionDate: savedProgress?.lastSessionDate || "",
+            dailySessions: savedProgress?.dailySessions || {}
+        };
+    } catch {
+        return { totalSessions: 0, currentStreak: 0, bestStreak: 0, lastSessionDate: "", dailySessions: {} };
+    }
+}
+
+function saveProgress() {
+    localStorage.setItem(progressStorageKey, JSON.stringify(progress));
+}
+
+function updateProgressDisplay() {
+    const today = getDateKey();
+    streakCount.textContent = progress.currentStreak;
+    bestStreakCount.textContent = progress.bestStreak;
+    totalSessionsCount.textContent = progress.totalSessions;
+    todaySessionsCount.textContent = progress.dailySessions[today] || 0;
+    sessionCountText.textContent = `${progress.totalSessions} focus session${progress.totalSessions === 1 ? "" : "s"} completed`;
+}
+
+function recordFocusSession() {
+    const today = getDateKey();
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    const yesterdayKey = getDateKey(yesterday);
+
+    progress.totalSessions += 1;
+    progress.dailySessions[today] = (progress.dailySessions[today] || 0) + 1;
+    progress.currentStreak = progress.lastSessionDate === yesterdayKey
+        ? progress.currentStreak + 1
+        : progress.lastSessionDate === today
+            ? progress.currentStreak
+            : 1;
+    progress.bestStreak = Math.max(progress.bestStreak, progress.currentStreak);
+    progress.lastSessionDate = today;
+    saveProgress();
+    updateProgressDisplay();
+}
 
 function formatCountdown(totalSecondsLeft) {
     const minutes = String(Math.floor(totalSecondsLeft / 60)).padStart(2, "0");
@@ -100,12 +165,11 @@ function finishCountdown() {
     isRunning = false;
 
     if (currentMode === "focus") {
-        completedSessions += 1;
-        sessionCountText.textContent = `${completedSessions} focus session${completedSessions === 1 ? "" : "s"} completed`;
+        recordFocusSession();
     }
 
     const nextMode = currentMode === "focus"
-        ? completedSessions % 4 === 0 ? "longBreak" : "shortBreak"
+        ? progress.totalSessions % 4 === 0 ? "longBreak" : "shortBreak"
         : "focus";
     currentMode = nextMode;
     totalSeconds = modes[currentMode].seconds;
@@ -161,8 +225,23 @@ modeButtons.forEach((modeButton) => {
 });
 
 renderTimer();
+updateProgressDisplay();
 button.addEventListener("click", startCountdown);
 resetButton.addEventListener("click", resetCountdown);
+
+function setupExpandablePanel(buttonElement, panelClass) {
+    const panel = buttonElement.parentElement.querySelector(`.${panelClass}`);
+    panel.hidden = true;
+
+    buttonElement.addEventListener("click", () => {
+        const isExpanded = buttonElement.getAttribute("aria-expanded") === "true";
+        buttonElement.setAttribute("aria-expanded", String(!isExpanded));
+        panel.hidden = isExpanded;
+    });
+}
+
+setupExpandablePanel(settingsButton, "settingsMenu");
+setupExpandablePanel(statsButton, "statsMenu");
 
 soundButtons.forEach((soundButton) => {
     soundButton.addEventListener("click", async () => {
