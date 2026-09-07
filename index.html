@@ -35,6 +35,13 @@
         </div>
 
             <div class = "dashboardControls">
+            <div class = "dashboardTop">
+            <section class = "dailyFact" aria-labelledby = "dailyFactTitle">
+                <h2 id = "dailyFactTitle">Fact of the day</h2>
+                <p id = "dailyFactText" aria-live = "polite">Loading today's fact...</p>
+                <a id = "dailyFactSource" class = "dailyFactSource" href = "https://uselessfacts.jsph.pl/" target = "_blank" rel = "noopener noreferrer" hidden>Source</a>
+            </section>
+            <div class = "pillControls">
             <details class = "soundControls">
                 <summary class = "dashboardButton">Sounds</summary>
                 <div class = "soundMenu" aria-label = "Background sound mixer">
@@ -144,10 +151,12 @@
                     <p>The different noises are designed to create a more immersive environment, helping you concentrate better and block out distractions.</p>
                 </div>
             </div>
+            </div>
+            </div>
 
             <iframe class="spotifyPlaylist" data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/1D2th3oVuAzVAab2eCA07Q?utm_source=generator&si=208a4872b9774cd8" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
 
-
+            </div>
             </div>
         </main>
 

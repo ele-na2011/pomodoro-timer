@@ -213,8 +213,62 @@ button {
     align-items: flex-start;
     justify-content: center;
     gap: 0.8rem;
-    width: auto;
+    width: min(100%, 340px);
+    flex: 0 1 340px;
     max-height: 100%;
+}
+
+.dashboardTop {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+}
+
+.pillControls {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0.8rem;
+}
+
+.dailyFact {
+    width: auto;
+    min-width: 0;
+    flex: 1 1 0;
+    box-sizing: border-box;
+    padding: 0.8rem 1rem;
+    color: #5b2c83;
+    background: rgba(255, 255, 255, 0.82);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    box-shadow:
+        1px 1px 0 #2b2a2a,
+        2px 2px 0 #2b2a2a,
+        3px 3px 0 #2b2a2a,
+        4px 4px 0 #2b2a2a,
+        5px 5px 0 #2b2a2a,
+        6px 6px 0 #2b2a2a,
+        7px 7px 10px rgba(0, 0, 0, 0.3);
+}
+
+.dailyFact h2 {
+    margin: 0 0 0.35rem;
+    font-size: 0.95rem;
+}
+
+.dailyFact p {
+    margin: 0;
+    font-size: 0.78rem;
+    line-height: 1.35;
+}
+
+.dailyFactSource {
+    display: inline-block;
+    margin-top: 0.45rem;
+    color: #5b2c83;
+    font-size: 0.7rem;
 }
 
 .settingsControls,
@@ -487,6 +541,19 @@ button {
     }
 
     .dashboardControls {
+        align-items: center;
+        width: 100%;
+        flex-basis: auto;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .dashboardTop {
+        flex-direction: column;
+    }
+
+    .pillControls {
         align-items: center;
         width: 100%;
         flex-direction: row;

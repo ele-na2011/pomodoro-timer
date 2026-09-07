@@ -28,6 +28,8 @@ const resetButton = document.getElementById("resetButton");
 const progressBar = document.getElementById("progressBar");
 const timerStatus = document.getElementById("timerStatus");
 const sessionCountText = document.getElementById("sessionCount");
+const dailyFactText = document.getElementById("dailyFactText");
+const dailyFactSource = document.getElementById("dailyFactSource");
 const modeButtons = document.querySelectorAll(".modeButton");
 const whiteNoiseAudio = document.getElementById("whiteNoiseAudio");
 const brownNoiseAudio = document.getElementById("brownNoiseAudio");
@@ -130,6 +132,25 @@ function updateProgressDisplay() {
     totalSessionsCount.textContent = progress.totalSessions;
     todaySessionsCount.textContent = progress.dailySessions[today] || 0;
     sessionCountText.textContent = `${progress.totalSessions} focus session${progress.totalSessions === 1 ? "" : "s"} completed`;
+}
+
+async function loadDailyFact() {
+    try {
+        const response = await fetch("https://uselessfacts.jsph.pl/api/v2/facts/today");
+        if (!response.ok) {
+            throw new Error(`Fact request failed with status ${response.status}`);
+        }
+
+        const fact = await response.json();
+        dailyFactText.textContent = fact.text || "Today's fact could not be loaded.";
+
+        if (fact.source_url) {
+            dailyFactSource.href = fact.source_url;
+            dailyFactSource.hidden = false;
+        }
+    } catch {
+        dailyFactText.textContent = "Today's fact is unavailable right now.";
+    }
 }
 
 function recordFocusSession() {
@@ -263,6 +284,7 @@ modeButtons.forEach((modeButton) => {
 
 renderTimer();
 updateProgressDisplay();
+loadDailyFact();
 button.addEventListener("click", startCountdown);
 resetButton.addEventListener("click", resetCountdown);
 
