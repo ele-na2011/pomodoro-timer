@@ -32,6 +32,7 @@ const modeButtons = document.querySelectorAll(".modeButton");
 const whiteNoiseAudio = document.getElementById("whiteNoiseAudio");
 const brownNoiseAudio = document.getElementById("brownNoiseAudio");
 const pinkNoiseAudio = document.getElementById("pinkNoiseAudio");
+const timerCompleteAudio = document.getElementById("timerCompleteAudio");
 const soundButtons = document.querySelectorAll(".sound-button");
 const volumeSliders = document.querySelectorAll(".volumeSlider");
 const streakCount = document.getElementById("streakCount");
@@ -56,8 +57,11 @@ const soundAudios = {
 
 const backgrounds = {
     space: "url(https://wallpapercave.com/wp/wp14437838.jpg)",
-    mountains: "url(https://imgcp.aacdn.jp/img-a/1200/900/global-aaj-front/article/2015/12/565f05f621364_565f018e5feb3_1467636135.jpg)",
-    lake: "url(https://4kwallpapers.com/images/wallpapers/sunset-lake-purple-pink-sky-scenery-8k-3840x2160-92.jpg)"
+    mountains: "url(https://images.wallpaperscraft.com/image/single/mountains_peaks_dusk_168351_3840x2400.jpg)",
+    lake: "url(https://4kwallpapers.com/images/wallpapers/sunset-lake-purple-pink-sky-scenery-8k-3840x2160-92.jpg)",
+    cybercity: "url(https://plus.unsplash.com/premium_photo-1733259750830-4cc0bd8d3979?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cHVycGxlJTIwY2l0eXxlbnwwfHwwfHx8MA%3D%3D)",
+    forest: "url(https://images.wallpapersden.com/image/download/purple-winter-forest_bGpmbGqUmZqaraWkpJRmbmdlrWZlbWU.jpg)",
+    "night city": "url(https://images8.alphacoders.com/138/thumb-1920-1389287.jpg)"
 };
 
 const backgroundStorageKey = "pomodoroBackground";
@@ -188,6 +192,9 @@ function finishCountdown() {
     timer = null;
     isRunning = false;
 
+    timerCompleteAudio.currentTime = 0;
+    timerCompleteAudio.play().catch(() => {});
+
     if (currentMode === "focus") {
         recordFocusSession();
     }
@@ -255,6 +262,7 @@ resetButton.addEventListener("click", resetCountdown);
 
 function setupExpandablePanel(buttonElement, panelClass) {
     const panel = buttonElement.parentElement.querySelector(`.${panelClass}`);
+    const closeButton = panel.querySelector(".windowCloseButton");
     panel.hidden = true;
 
     buttonElement.addEventListener("click", () => {
@@ -262,11 +270,20 @@ function setupExpandablePanel(buttonElement, panelClass) {
         buttonElement.setAttribute("aria-expanded", String(!isExpanded));
         panel.hidden = isExpanded;
     });
+
+    closeButton.addEventListener("click", () => {
+        buttonElement.setAttribute("aria-expanded", "false");
+        panel.hidden = true;
+    });
 }
 
 setupExpandablePanel(settingsButton, "settingsMenu");
 setupExpandablePanel(statsButton, "statsMenu");
 setupExpandablePanel(customButton, "customMenu");
+
+document.querySelector(".soundControls").querySelector(".windowCloseButton").addEventListener("click", () => {
+    document.querySelector(".soundControls").open = false;
+});
 
 backgroundButtons.forEach((backgroundButton) => {
     backgroundButton.addEventListener("click", () => {

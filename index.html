@@ -38,6 +38,7 @@
             <details class = "soundControls">
                 <summary class = "dashboardButton">Effects</summary>
                 <div class = "soundMenu" aria-label = "Background sound mixer">
+                    <button class = "windowCloseButton" type = "button" aria-label = "Close effects">&times;</button>
                     <div class = "soundRow">
                         <span>White Noise</span>
                         <button class = "sound-button" data-sound = "white" type = "button" aria-pressed = "false">Play</button>
@@ -69,6 +70,7 @@
             <div class = "settingsControls">
                 <button id = "settingsButton" class = "dashboardButton" type = "button" aria-expanded = "false" aria-controls = "settingsMenu">Settings</button>
                 <div class = "settingsMenu" aria-label = "Timer settings">
+                    <button class = "windowCloseButton" type = "button" aria-label = "Close settings">&times;</button>
                     <label for = "focusDuration">Focus duration (minutes)</label>
                     <input id = "focusDuration" type = "number" min = "1" max = "120" value = "25">
                     <label for = "shortBreakDuration">Short break duration (minutes)</label>
@@ -81,6 +83,9 @@
                         <button class = "backgroundButton" data-background = "space" type = "button" aria-pressed = "false">Space</button>
                         <button class = "backgroundButton" data-background = "mountains" type = "button" aria-pressed = "false">Mountains</button>
                         <button class = "backgroundButton" data-background = "lake" type = "button" aria-pressed = "false">Lake</button>
+                        <button class = "backgroundButton" data-background = "cybercity" type = "button" aria-pressed = "false">Cybercity</button>
+                        <button class = "backgroundButton" data-background = "forest" type = "button" aria-pressed = "false">Forest</button>
+                        <button class = "backgroundButton" data-background = "night city" type = "button" aria-pressed = "false">Night City</button>
                     </div>
                 </div>
             </div>
@@ -88,6 +93,7 @@
             <div class = "statsControls">
                 <button id = "statsButton" class = "dashboardButton" type = "button" aria-expanded = "false" aria-controls = "statsMenu">Stats</button>
                 <div class = "statsMenu" aria-label = "Timer statistics">
+                    <button class = "windowCloseButton" type = "button" aria-label = "Close stats">&times;</button>
                     <div class = "statsGrid">
                         <p><strong id = "streakCount">0</strong><span>day streak</span></p>
                         <p><strong id = "bestStreakCount">0</strong><span>best streak</span></p>
@@ -100,6 +106,7 @@
             <div class = "customControls">
                 <button id = "customButton" class = "dashboardButton" type = "button" aria-expanded = "false" aria-controls = "customMenu">FAQs</button>
                 <div id = "customMenu" class = "customMenu" aria-label = "Custom panel">
+                    <button class = "windowCloseButton" type = "button" aria-label = "Close FAQs">&times;</button>
                     <!-- Add your custom HTML and controls inside this panel. -->
                     <h2>FAQs</h2>
                     <p><strong>What is a pomodoro?</strong></p>
@@ -113,7 +120,7 @@
                 </div>
             </div>
 
-            <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/1D2th3oVuAzVAab2eCA07Q?utm_source=generator&si=208a4872b9774cd8" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            <iframe class="spotifyPlaylist" data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/1D2th3oVuAzVAab2eCA07Q?utm_source=generator&si=208a4872b9774cd8" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
 
 
             </div>
@@ -131,6 +138,12 @@
 
         <audio id = "pinkNoiseAudio" loop>
             <source src = "pink noise.mp3" type = "audio/mpeg">
+            your browser does not support the audio element
+        </audio>
+
+        <!-- Add your timer-finished audio file here and update the src filename. -->
+        <audio id = "timerCompleteAudio">
+            <source src = "metalpipe.mp3" type = "audio/mpeg">
             your browser does not support the audio element
         </audio>
 

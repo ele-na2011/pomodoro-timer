@@ -249,6 +249,43 @@ button {
     transform: translateY(-1px);
 }
 
+.spotifyPlaylist {
+    display: block;
+    max-width: 100%;
+    box-sizing: border-box;
+    box-shadow:
+        1px 1px 0 #2b2a2a,
+        2px 2px 0 #2b2a2a,
+        3px 3px 0 #2b2a2a,
+        4px 4px 0 #2b2a2a,
+        5px 5px 0 #2b2a2a,
+        6px 6px 0 #2b2a2a,
+        7px 7px 10px rgba(0, 0, 0, 0.3);
+}
+
+.windowCloseButton {
+    position: absolute;
+    top: 0.45rem;
+    right: 0.55rem;
+    width: 1.6rem;
+    height: 1.6rem;
+    padding: 0;
+    color: #5b2c83;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(91, 44, 131, 0.35);
+    border-radius: 50%;
+    font-size: 1.1rem;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.windowCloseButton:hover,
+.windowCloseButton:focus-visible {
+    color: white;
+    background: #5b2c83;
+}
+
 .settingsMenu,
 .statsMenu,
 .customMenu {
