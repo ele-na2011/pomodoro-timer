@@ -402,14 +402,6 @@ button {
     display: none;
 }
 
-.soundControls summary::after {
-    content: " +";
-}
-
-.soundControls[open] summary::after {
-    content: " -";
-}
-
 .soundMenu {
     position: fixed;
     right: max(1rem, calc((100vw - 960px) / 2 + 105px));
