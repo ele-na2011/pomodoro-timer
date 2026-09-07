@@ -63,6 +63,33 @@
                             <input class = "volumeSlider" data-sound = "pink" type = "range" min = "0" max = "1" step = "0.01" value = "0.5">
                         </label>
                     </div>
+
+                    <div class = "soundRow">
+                        <span>Rain Sounds</span>
+                        <button class = "sound-button" data-sound = "rain" type = "button" aria-pressed = "false">Play</button>
+                        <label class = "volumeControl">
+                            <span class = "sr-only">Rain Sounds volume</span>
+                            <input class = "volumeSlider" data-sound = "rain" type = "range" min = "0" max = "1" step = "0.01" value = "0.5">
+                        </label>
+                    </div>
+
+                    <div class = "soundRow">
+                        <span>Bird Sounds</span>
+                        <button class = "sound-button" data-sound = "birds" type = "button" aria-pressed = "false">Play</button>
+                        <label class = "volumeControl">
+                            <span class = "sr-only">Bird Sounds volume</span>
+                            <input class = "volumeSlider" data-sound = "birds" type = "range" min = "0" max = "1" step = "0.01" value = "0.5">
+                        </label>
+                    </div>
+
+                    <div class = "soundRow">
+                        <span>Keyboard Sounds</span>
+                        <button class = "sound-button" data-sound = "keyboard" type = "button" aria-pressed = "false">Play</button>
+                        <label class = "volumeControl">
+                            <span class = "sr-only">Keyboard Sounds volume</span>
+                            <input class = "volumeSlider" data-sound = "keyboard" type = "range" min = "0" max = "1" step = "0.01" value = "0.5">
+                        </label>
+                    </div>
                 </div>
                 
             </details>
@@ -136,6 +163,21 @@
 
         <audio id = "pinkNoiseAudio" loop>
             <source src = "pink noise.mp3" type = "audio/mpeg">
+            your browser does not support the audio element
+        </audio>
+
+        <audio id = "rainSoundAudio" loop>
+            <source src = "rain sounds.mp3" type = "audio/mpeg">
+            your browser does not support the audio element
+        </audio>
+
+        <audio id = "birdSoundAudio" loop>
+            <source src = "bird sounds.mp3" type = "audio/mpeg">
+            your browser does not support the audio element
+        </audio>
+
+        <audio id = "keyboardSoundAudio" loop>
+            <source src = "keyboard sounds.mp3" type = "audio/mpeg">
             your browser does not support the audio element
         </audio>
 

@@ -32,6 +32,9 @@ const modeButtons = document.querySelectorAll(".modeButton");
 const whiteNoiseAudio = document.getElementById("whiteNoiseAudio");
 const brownNoiseAudio = document.getElementById("brownNoiseAudio");
 const pinkNoiseAudio = document.getElementById("pinkNoiseAudio");
+const rainSoundAudio = document.getElementById("rainSoundAudio");
+const birdSoundAudio = document.getElementById("birdSoundAudio");
+const keyboardSoundAudio = document.getElementById("keyboardSoundAudio");
 const timerCompleteAudio = document.getElementById("timerCompleteAudio");
 const soundButtons = document.querySelectorAll(".sound-button");
 const volumeSliders = document.querySelectorAll(".volumeSlider");
@@ -53,6 +56,9 @@ const soundAudios = {
     white: whiteNoiseAudio,
     brown: brownNoiseAudio,
     pink: pinkNoiseAudio,
+    rain: rainSoundAudio,
+    birds: birdSoundAudio,
+    keyboard: keyboardSoundAudio
 };
 
 const backgrounds = {
